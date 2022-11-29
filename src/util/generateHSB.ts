@@ -1,10 +1,4 @@
 import { hsvToHex } from '@super-effective/colorutils';
-
-let energy = 0;
-let dance = 0;
-let val = 0;
-let tempo = 0;
-let mode = 0;
 {/* 
 HSB Ranges
 
