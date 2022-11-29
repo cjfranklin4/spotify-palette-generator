@@ -1,6 +1,9 @@
 import React from 'react';
+import {generateHSB} from './util/generateHSB';
+import {generateH} from './util/generateHSB';
 
 function App() {
+  let bgColor = generateHSB(0.5,0.4,0.33,0.9,0.66)
   return (
     <div className="App">
       <header className="App-header">
@@ -14,7 +17,7 @@ function App() {
       </div>
 
       <div className='paletteBox'> {/* will be its own component */}
-          <div className="colorBox" style={{backgroundColor:'HSLtoRBGColor'}}> {/* will be its own repeated component */}
+          <div className="colorBox" style={{backgroundColor:bgColor, width:400, height: 400}}> {/* will be its own repeated component */}
             {/*HEX CODE */}
             {/* Track Name for this Color */}
           </div>
