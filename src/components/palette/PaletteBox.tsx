@@ -1,5 +1,3 @@
-import ColorBox from "./ColorBox"
-
 const PaletteBox = () => {
     return (
         <div className='paletteBox'>
