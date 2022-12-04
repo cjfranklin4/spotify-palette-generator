@@ -1,12 +1,18 @@
-const PaletteBox = () => {
+import ColorBox from "./ColorBox"
+
+type PaletteBoxProps = {
+    bgColor: string
+}
+
+const PaletteBox = ({bgColor}: PaletteBoxProps) => {
     return (
         <div className='paletteBox'>
             <div className='colorBox-container'>
             {/*
-                Repeat the ColorBox Component 10 times for the Top 10 Tracks
-                I need to determine if the Top 10 track info will be returned as an object or array 
+                ColorBox component is mapped 5 times (for each track)
              */}
             </div>
+            <ColorBox bgColor={bgColor} />
             <div className="savePalette">
                 Save Palette to your Local Storage
             </div>

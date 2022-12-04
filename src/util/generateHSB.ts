@@ -125,18 +125,16 @@ const generateB = (mode: number): number => {
 }
 
 {/* Combine all 3 values to get HSB Value */}
-const generateHSB = (energy: number, dance: number, val: number, tempo: number, mode: number) => {
+const generateHSB = (energy: number, dance: number, val: number, tempo: number, mode: number): string => {
     let h = generateH(energy, dance, val);
     let s = generateS(tempo);
     let b = generateB(mode);
-    console.log(h, 'hex', s, 'sat', b, 'brightness')
+    //console.log(h, 'hex', s, 'sat', b, 'brightness')
     let hex = hsvToHex(h,s,b);
-    console.log(hex,'hex')
-    //let hex=0;
+    //console.log(hex,'hex')
     return (
         hex
     )
 }
-{/* Convert HSB Value to RGB/Hex Code */}
 
-export {generateHSB, generateH}
+export {generateHSB}
