@@ -1,8 +1,10 @@
-const HomePlaceholder = () => {
+import { loginUrl } from "../util/spotify"
+
+const HomePlaceholder = ({logInSpotify, accToken}: any) => {
     return (
         <div className='homePlaceholder'>
           <div>Get the colors of your top 5 spotify tracks</div>
-          <button>Connect Spotify</button> {/* will go away if logged in to spotify */}
+          <a href={loginUrl}>Login to Spotify</a> {/* will go away if logged in to spotify */}
         </div>
     )
 }
