@@ -1,4 +1,8 @@
 import {useState, useEffect} from 'react';
+import PaletteBox from './palette/PaletteBox';
+import { generateHSB } from "../util/generateHSB";
+
+
 type audioFeaturesType = {
         acousticness: number,
         analysis_url: string,
@@ -19,7 +23,7 @@ type audioFeaturesType = {
         uri: string,
         valence: number
 }
-type analysisType = {
+export type analysisType = {
     danceability: number,
     energy: number,
     id: string,
@@ -30,7 +34,29 @@ type analysisType = {
 const TopTracks = ({spotifyApi}: any) => {
     const [topFiveSongs, setTopFiveSongs] = useState<string[]>({} as string[])
     const [songsFeatures, setSongsFeatures] = useState<analysisType[]>({} as analysisType[]);
+    const [genPalette, setGenPalette] = useState(false);
+    const [hexColors, setHexColors] = useState<any[]>({} as any[])
     //const [anValues, setAnValues] = useState<analysisType>({} as analysisType);
+
+    const colorAnalysis = (songsInfo: any) => {
+        //console.log(songsInfo, 'songsIngo')
+        let analysisValues : any[] = [];
+        console.log(analysisValues, 'alaysis starting values')
+        console.log(songsInfo, 'song fearures in analysis')
+        analysisValues = songsInfo.map((song : any) => generateHSB(song.energy, song.danceability, song.valence, song.tempo, song.mode))
+        console.log(analysisValues, 'analysis Values')
+
+        /* let paletteValues = analysisValues.map((val1, index) => (
+            {
+              'hex': val1,
+              'songName': topFiveSongs[index]
+            }
+          )); */
+        //console.log(paletteValues, 'palette values')
+        setHexColors(analysisValues)
+        setGenPalette(true);
+        return analysisValues
+    }
 
     const getTopSongs = () => {
         console.log('i work');
@@ -50,7 +76,7 @@ const TopTracks = ({spotifyApi}: any) => {
 
                 setTopFiveSongs(trackNames)
 
-                //console.log(trackIds, trackNames)
+                console.log( trackNames)
 
                 return trackIds
             },
@@ -77,18 +103,25 @@ const TopTracks = ({spotifyApi}: any) => {
                     id: song.id
                 }
             })
-            console.log(songFeaturesArray, 'song features array')
-            setSongsFeatures(songFeaturesArray);
+            console.log(songFeaturesArray, 'song features array', typeof songFeaturesArray)
+            setSongsFeatures(songFeaturesArray.song);
+            //setGenPalette(true);
+
+            console.log(songFeaturesArray, 'runnign genpalette code')
+            colorAnalysis(songFeaturesArray);
+
+            //setTimeO
         })
-
-
         //setAnValues(songFeaturesArray)
     }
+    
     return(
-        <div className='confirmTop10Tracks'>
-            Lists out the User's Top 10 Spotify Tracks and asks to confirm palette generation
-            <p>Brief explanation on how palette is generated</p>
-            <button onClick={() => getTopSongs()}>Generate Palette</button> {/* will run the generateHSB function and display the component below to the DOM */}
+        <div>
+           {genPalette ? <PaletteBox genPalette={genPalette} songNames={topFiveSongs} songAnalysis={hexColors} /> :<div className='confirmTop10Tracks'>
+                Lists out the User's Top 10 Spotify Tracks and asks to confirm palette generation
+                <p>Brief explanation on how palette is generated</p>
+                <button onClick={() => getTopSongs()}>Generate Palette</button> {/* will run the generateHSB function and display the component below to the DOM */}
+            </div>}
         </div>
     )
 }
