@@ -1,13 +1,15 @@
 type ColorBoxProps = {
-    bgColor: string
+    bgColor: string,
+    trackName: string
 }
 
-const ColorBox = ({bgColor}: ColorBoxProps) => {
+const ColorBox = ({bgColor, trackName}: ColorBoxProps) => {
     return(
         <div className="colorBox" style={{backgroundColor:bgColor, width:400, height: 400}}>
             {/* Track Name for this Color */}
             {/*HEX CODE */}
             {bgColor}
+            {trackName}
         </div>
     )
 }

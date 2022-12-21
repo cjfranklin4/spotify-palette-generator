@@ -1,6 +1,4 @@
 import ColorBox from "./ColorBox"
-import {useState, useEffect} from 'react';
-import { generateHSB } from "../../util/generateHSB";
 import { analysisType } from "../TopTracks";
 
 
@@ -12,28 +10,21 @@ type PaletteBoxProps = {
 
 
 const PaletteBox = ({songNames, songAnalysis}: PaletteBoxProps) => {
-    /* let analysisValues : any[] = [];
-    const colorAnalysis = (songsInfo: any) => {
-        //console.log(songsInfo, 'songsIngo')
-        analysisValues = songsInfo.map((song : any) => generateHSB(song.energy, song.danceability, song.valence, song.tempo, song.number))
-        console.log(analysisValues)
-        return analysisValues
-    } */
 
-    /* useEffect(() => {
-        colorAnalysis(songAnalysis)
-    }, []) */
-
-    console.log(songAnalysis, 'palette box componenr')
+   // console.log(songAnalysis, 'palette box componenr', songNames, 'song names')
+    let hexAnalysis: any = [];
+    let testAnalysis = songAnalysis.forEach((hex, index) => {
+        const songName = songNames[index];
+        hexAnalysis.push({hex, songName})
+    })
+    console.log(hexAnalysis, 'this should work right?')
+    
     
     return (
             <div className='paletteBox'>
             <div className='colorBox-container' style={{display: "flex"}}>
-                {/*
-                    ColorBox component is mapped 5 times (for each track)
-                */}
                 {
-                  songAnalysis.map((value : any, index: any) => <ColorBox key={index} bgColor={value} />)
+                  hexAnalysis.map((item : any, index: any) => <ColorBox key={index} trackName={item.songName} bgColor={item.hex} />)
                 }
             </div>
                 <div className="savePalette">

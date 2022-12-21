@@ -1,62 +1,4 @@
 import { hsvToHex } from '@super-effective/colorutils';
-{/* 
-HSB Ranges
-
-Red = 0-30
-Orange = 30-60
-
-Yellow = 60-90
-Yellow-Green = 90-120
-
-Green = 120-150
-
-Cyan = 150-180
-
-Blue = 210-240
-
-Purple = 240-270
-Purple-Magenta = 270-300
-
-Magenta = 300-330
-Magenta-Red = 330-360
-
-*/}
-
-{/*
-    Check if Energy/Danceability/Valence are over a certian value...(0.49)
-    ---If (X) over (0.49), generate High values for H
-    ---If (X) under (0.49), generate Low values for H
-
-*/}
-
-{/* 
-Generate H from Energy Range......Red to Green 
-
-High Energy = Red
-
-Low Energy = Green
-
-
-*/}
-
-{/*
-
-Generate H from Danceability....Orange to Blue
-
-High Danceability = Orange
-
-Low Danceability = Blue
-
-*/}
-
-{/* 
-Generate H from Valence....Purple to Yellow
-
-High Valence = Yellow
-
-Low Valence = Purple
-
-*/}
 
 const randomNumber = (min: number, max: number): number => {
     return Math.floor(Math.random()*(max-min)+min)
@@ -93,7 +35,7 @@ const generateH = (energy: number, dance: number, val: number): number => {
     return hue
 }
 
-{/* Generate S from Tempo */}
+/* Generate S from Tempo */
 
 const generateS = (tempo: number): number => {
     let sat = 0;
@@ -111,13 +53,6 @@ const generateS = (tempo: number): number => {
     return sat
 }
 
-{/* 
-
-Generate B from Mode
-
-If Mode over (0.49), generate High values for Brightness
-If Mode under (0.49), generate Low values for Brightness
-*/}
 
 const generateB = (mode: number): number => {
     let bri = 0;
@@ -130,15 +65,15 @@ const generateB = (mode: number): number => {
     return bri
 }
 
-{/* Combine all 3 values to get HSB Value */}
+/* Combine all 3 values to get HSB Value */
 const generateHSB = (energy: number, dance: number, val: number, tempo: number, mode: number): string => {
     let h = generateH(energy, dance, val);
     let s = generateS(tempo);
     let b = generateB(mode);
-    console.log(energy, 'energy', dance, 'dance', val, 'val', tempo, 'tempo', mode, 'mode')
-    console.log(h, 'hue', s, 'sat', b, 'brightness')
+    //console.log(energy, 'energy', dance, 'dance', val, 'val', tempo, 'tempo', mode, 'mode')
+    //console.log(h, 'hue', s, 'sat', b, 'brightness')
     let hex = hsvToHex(h,s,b);
-    console.log(hex,'hex')
+    //console.log(hex,'hex')
     return (
         hex
     )
